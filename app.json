@@ -11,6 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": ["@logrocket/react-native"],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -21,10 +22,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.pcharda.bcweb"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ae7de4e1-1cec-4ed2-8c6c-5bc47af897ff"
+      }
+    },
+    "owner": "pcharda"
   }
 }
