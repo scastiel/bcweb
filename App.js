@@ -1,10 +1,11 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import Login from './src/components/Login';
-import {AuthContext} from './src/context/AuthContext';
+import {AuthContext, AuthProvider} from './src/context/AuthContext';
 import * as Keychain from 'react-native-keychain';
 import Dashboard from './src/components/Dashboard';
 import Spinner from './src/components/Spinner';
 import LogRocket from '@logrocket/react-native';
+import { AxiosProvider } from './src/context/AxiosContext';
 
 LogRocket.init('pekmhp/logrockettest')
 
@@ -49,7 +50,17 @@ const App = () => {
   }
 };
 
-export default App;
+const Root = () => {
+  return (
+    <AuthProvider>
+      <AxiosProvider>
+        <App />
+      </AxiosProvider>
+    </AuthProvider>
+  );
+};
+
+export default Root;
 
 /* import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
