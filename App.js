@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import Login from './src/components/Login';
 import {AuthContext, AuthProvider} from './src/context/AuthContext';
-import * as Keychain from 'react-native-keychain';
+import * as SecureStore from 'expo-secure-store';
 import Dashboard from './src/components/Dashboard';
 import Spinner from './src/components/Spinner';
 import LogRocket from '@logrocket/react-native';
@@ -15,8 +15,8 @@ const App = () => {
 
   const loadJWT = useCallback(async () => {
     try {
-      const value = await Keychain.getGenericPassword();
-      const jwt = JSON.parse(value.password);
+      const value = await SecureStore.getItemAsync('token')
+      const jwt = JSON.parse(value);
 
       authContext.setAuthState({
         accessToken: jwt.accessToken || null,
@@ -26,7 +26,7 @@ const App = () => {
       setStatus('success');
     } catch (error) {
       setStatus('error');
-      console.log(`Keychain Error: ${error.message}`);
+      console.log(`SecureStore Error: ${error.message}`);
       authContext.setAuthState({
         accessToken: null,
         refreshToken: null,

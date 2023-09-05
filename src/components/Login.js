@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useContext, useState} from 'react';
 import {AuthContext} from '../context/AuthContext';
-import * as Keychain from 'react-native-keychain';
+import * as SecureStore from 'expo-secure-store';
 import {AxiosContext} from '../context/AxiosContext';
 
 const Login = () => {
@@ -33,7 +33,7 @@ const Login = () => {
         authenticated: true,
       });
 
-      await Keychain.setGenericPassword(
+      await SecureStore.setItemAsync(
         'token',
         JSON.stringify({
           accessToken,
@@ -41,7 +41,8 @@ const Login = () => {
         }),
       );
     } catch (error) {
-      Alert.alert('Login Failed', error.response.data.message);
+      console.error(error.response?.data ?? error)
+      Alert.alert('Login Failed', error.response?.data.message);
     }
   };
 
