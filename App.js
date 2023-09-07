@@ -91,9 +91,9 @@ const App = () => {
   const onPasswordChange = (password) => setPassword(password);
 
   const renderCondition = (alreadyLogged)=> {
-    Alert.alert("logged", "it is cool!");
     let logged = alreadyLogged
     if (logged) {
+      Alert.alert("logged", "it is cool!");
       return (
         <SafeAreaView style={styles.container}>
           <Text style={styles.toolbar}>App Name</Text>
