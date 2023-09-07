@@ -134,7 +134,8 @@ const App = () => {
       )
     }
   }
-  renderCondition(isLogged);
+  let toRender = renderCondition(isLogged);
+  return toRender;
 };
 
 const styles = StyleSheet.create({
