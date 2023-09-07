@@ -21,7 +21,6 @@ const App = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [bc, setBc] = React.useState("");
-  const [isLogged, setIsLogged] = React.useState(false);
 
   const displayBcs = async () => {
     try {
@@ -79,7 +78,6 @@ const App = () => {
       setRefreshToken(refreshToken);
       Alert.alert("AccessToken : ", accessToken);
       Alert.alert("Success", "Login successfull");
-      setIsLogged(true);
       renewToken(token);
       //displayBcs(token);
     } catch (error) {
@@ -90,51 +88,35 @@ const App = () => {
   const onUsernameChange = (username) => setUsername(username);
   const onPasswordChange = (password) => setPassword(password);
 
-  const renderCondition = (alreadyLogged)=> {
-    Alert.alert("logged", "it is cool!");
-    let logged = alreadyLogged
-    if (logged) {
-      return (
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.toolbar}>App Name</Text>
-          <ScrollView style={styles.content}>
-            <TextInput
-              style={styles.preview}
-              value={bc}
-              placeholder="bc"
-              editable={false}
-              multiline
-            /> 
-          </ScrollView>
-        </SafeAreaView>
-      )
-    } else {
-      Alert.alert("not logged", "it is not cool!");
-      return (
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.toolbar}>App Name</Text>
-          <ScrollView style={styles.content}>
-            <TextInput
-              style={styles.input}
-              onChangeText={onUsernameChange}
-              value={username}
-              placeholder="Username"
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={onPasswordChange}
-              value={password}
-              placeholder="Password"
-            />
-            <TouchableOpacity onPress={onSave} style={styles.button}>
-              <Text>Save</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </SafeAreaView>
-      )
-    }
-  }
-  renderCondition(isLogged);
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.toolbar}></Text>
+      <ScrollView style={styles.content}>
+        <TextInput
+          style={styles.input}
+          onChangeText={onUsernameChange}
+          value={username}
+          placeholder="Username"
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={onPasswordChange}
+          value={password}
+          placeholder="Password"
+        />
+        <TouchableOpacity onPress={onSave} style={styles.button}>
+          <Text>Save</Text>
+        </TouchableOpacity>
+        <TextInput
+          style={styles.preview}
+          value={bc}
+          placeholder="bc"
+          editable={false}
+          multiline
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({

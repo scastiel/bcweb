@@ -14,7 +14,6 @@ import {AxiosContext} from '../context/AxiosContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
   const authContext = useContext(AuthContext);
   const {publicAxios} = useContext(AxiosContext);
@@ -22,8 +21,8 @@ const Login = () => {
   const onLogin = async () => {
     try {
       const response = await publicAxios.post('/login', {
-        email,
-        password,
+        "email": email,
+        "password": password,
       });
 
       const {accessToken, refreshToken} = response.data;

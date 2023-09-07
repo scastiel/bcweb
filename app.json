@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bcweb",
-    "slug": "bcweb",
+    "name": "remoteapi",
+    "slug": "remoteapi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "plugins": ["@logrocket/react-native"],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -22,15 +21,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.pcharda.bcweb"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "ae7de4e1-1cec-4ed2-8c6c-5bc47af897ff"
+        "projectId": "6f38782f-659c-4920-8cb9-0f30175b9aa9"
       }
     },
     "owner": "pcharda"
