@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import Login from "./src/components/Login";
 import BcList from "./src/components/BcList";
 import store from "./src/redux/store";

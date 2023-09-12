@@ -4,16 +4,20 @@ import {
     SafeAreaView,
     TextInput,
     Alert,
+    ScrollView,
+    TouchableOpacity,
   } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";  
 import { addToken } from '../redux/actions';
+import * as React from "react";
+import axios from 'axios';
 
 
 const Login = () => {
 
   const dispatch = useDispatch();
   
-  const token = useSelector((state) => state.tokenReducer.token);
+  const token = useSelector((state) => state.token);
   console.log(token);
 
   const [username, setUsername] = React.useState("");
@@ -38,7 +42,7 @@ const Login = () => {
       let accessToken = response.data.access;
 
       dispatch(addToken(accessToken));
-      console.log(store.getState());
+      //console.log(store.getState());
       Alert.alert("AccessToken : ", accessToken);
       Alert.alert("Success", "Login successfull");
 
@@ -54,24 +58,24 @@ const Login = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-        <Text style={styles.toolbar}>App Name</Text>
-        <ScrollView style={styles.content}>
-        <TextInput
-            style={styles.input}
-            onChangeText={onUsernameChange}
-            value={username}
-            placeholder="Username"
-        />
-        <TextInput
-            style={styles.input}
-            onChangeText={onPasswordChange}
-            value={password}
-            placeholder="Password"
-        />
-        <TouchableOpacity onPress={onSave} style={styles.button}>
-            <Text>Save</Text>
-        </TouchableOpacity>
-        </ScrollView>
+          <Text style={styles.toolbar}>App Name</Text>
+          <ScrollView style={styles.content}>
+          <TextInput
+              style={styles.input}
+              onChangeText={onUsernameChange}
+              value={username}
+              placeholder="Username"
+          />
+          <TextInput
+              style={styles.input}
+              onChangeText={onPasswordChange}
+              value={password}
+              placeholder="Password"
+          />
+          <TouchableOpacity onPress={onSave} style={styles.button}>
+              <Text>Save</Text>
+          </TouchableOpacity>
+          </ScrollView>
         </SafeAreaView>
 
     )
