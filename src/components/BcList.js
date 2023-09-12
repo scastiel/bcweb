@@ -7,7 +7,8 @@ const BcList = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.apiReducer.data);
   const loading = useSelector((state) => state.apiReducer.loading);
-  const token = useSelector((state) => state.tokenReducer.token)
+  const token = useSelector((state) => state.tokenReducer.token);
+  Alert.alert('that is the secret token : ', token);
 
   useEffect(() => {
     dispatch(apiCall('https://demo-btw.monkey-soft.fr/bcweb/bcx/', token));
