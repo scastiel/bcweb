@@ -8,17 +8,43 @@ import {
     TouchableOpacity,
   } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";  
-import { addToken } from '../redux/actions';
+import { addToken, addRefreshToken, toggleIsLogged } from '../redux/actions';
 import * as React from "react";
 import axios from 'axios';
 
 
 const Login = () => {
 
+
   const dispatch = useDispatch();
   
   const token = useSelector((state) => state.token);
-  console.log(token);
+  const refreshToken = useSelector((state) => state.refreshToken);
+  const logged = useSelector((state) => state.isLogged);
+
+  const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/";
+
+  const renewToken = async () => {
+    try {
+      const response = await axios.post(
+        endpointRefreshToken,
+        JSON.stringify({
+          refresh: refreshToken,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        }
+      );
+      dispatch(addToken(response.data.access));
+      Alert.alert("new AccessToken : ", token);
+    } catch (error) {
+      Alert.alert("Error", `There was an error while refreshing : ${error}`);
+    }
+  };
+
+
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -40,11 +66,18 @@ const Login = () => {
         }
       );
       let accessToken = response.data.access;
+      let newRefreshToken = response.data.refresh;
 
       dispatch(addToken(accessToken));
+      dispatch(toggleIsLogged(logged));
+      dispatch(addRefreshToken(newRefreshToken));
+     
       //console.log(store.getState());
-      Alert.alert("AccessToken : ", accessToken);
+      Alert.alert("AccessToken : ", token);
+      Alert.alert("RefreshToken : ", refreshToken);
+      Alert.alert("Is logged ? : ", logged);
       Alert.alert("Success", "Login successfull");
+      //renewToken();
 
     } catch (error) {
       Alert.alert("Error", `There was an error while logging: ${error}`);
@@ -58,7 +91,7 @@ const Login = () => {
     return (
 
         <SafeAreaView style={styles.container}>
-          <Text style={styles.toolbar}>App Name</Text>
+          <Text style={styles.toolbar}>LOGIN</Text>
           <ScrollView style={styles.content}>
           <TextInput
               style={styles.input}
