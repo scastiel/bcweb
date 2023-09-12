@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToken, addRefreshToken, toggleIsLogged } from '../redux/actions';
 import * as React from "react";
 import axios from 'axios';
+//import store from '../redux/store';
 
 
 const Login = () => {
@@ -24,12 +25,12 @@ const Login = () => {
 
   const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/";
 
-  const renewToken = async () => {
+  const renewToken = async (newRefreshToken) => {
     try {
       const response = await axios.post(
         endpointRefreshToken,
         JSON.stringify({
-          refresh: refreshToken,
+          refresh: newRefreshToken,
         }),
         {
           headers: {
@@ -38,7 +39,7 @@ const Login = () => {
         }
       );
       dispatch(addToken(response.data.access));
-      Alert.alert("new AccessToken : ", token);
+      Alert.alert("new AccessToken : ", response.data.access);
     } catch (error) {
       Alert.alert("Error", `There was an error while refreshing : ${error}`);
     }
@@ -73,11 +74,10 @@ const Login = () => {
       dispatch(addRefreshToken(newRefreshToken));
      
       //console.log(store.getState());
-      Alert.alert("AccessToken : ", token);
-      Alert.alert("RefreshToken : ", refreshToken);
-      Alert.alert("Is logged ? : ", logged);
+
       Alert.alert("Success", "Login successfull");
-      //renewToken();
+      //console.log (store.getState());
+      renewToken(newRefreshToken);
 
     } catch (error) {
       Alert.alert("Error", `There was an error while logging: ${error}`);
@@ -106,7 +106,7 @@ const Login = () => {
               placeholder="Password"
           />
           <TouchableOpacity onPress={onSave} style={styles.button}>
-              <Text>Save</Text>
+              <Text>Envoyer</Text>
           </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>

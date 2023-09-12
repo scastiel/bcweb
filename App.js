@@ -1,6 +1,5 @@
 import * as React from "react";
-import Login from "./src/components/Login";
-import BcList from "./src/components/BcList";
+import Main from "./src/components/Main";
 import store from "./src/redux/store";
 import { Provider } from "react-redux";
 
@@ -13,7 +12,7 @@ const App = () => {
   const isLogged = false;
   return (
     <Provider store={store}>
-      {isLogged ? <BcList /> : <Login />}
+      <Main/>
     </Provider>
   );
 };
