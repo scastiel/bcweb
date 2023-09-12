@@ -1,7 +1,7 @@
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator, Alert} from 'react-native';
 import apiCall from '../redux/apiCall';
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";  
+import { useSelector, useDispatch, useEffect } from "react-redux";  
 
 const BcList = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const BcList = () => {
   const token = useSelector((state) => state.tokenReducer.token);
   Alert.alert('that is the secret token : ', token);
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(apiCall('https://demo-btw.monkey-soft.fr/bcweb/bcx/', token));
   }, []);
 
@@ -36,7 +36,7 @@ const BcList = () => {
         <ActivityIndicator size="large" color="red" />
       ) : (
         <FlatList
-          data={data}
+          data={data.results}
           renderItem={({item}) => <Text>{item.title}</Text>}
           keyExtractor={(item, index) => index.toString()}
         />

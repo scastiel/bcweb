@@ -19,9 +19,9 @@ const Login = () => {
 
   const dispatch = useDispatch();
   
-  const token = useSelector((state) => state.token);
-  const refreshToken = useSelector((state) => state.refreshToken);
-  const logged = useSelector((state) => state.isLogged);
+  const token = useSelector((state) => state.tokenReducer.token);
+  const refreshToken = useSelector((state) => state.tokenReducer.refreshToken);
+  const logged = useSelector((state) => state.tokenReducer.isLogged);
 
   const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/";
 

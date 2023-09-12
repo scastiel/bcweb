@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/"; */
 
 const Main = () => {
-  const logged = useSelector((state) => state.isLogged);
+  const logged = useSelector((state) => state.tokenReducer.isLogged);
   //const dispatch = useDispatch();
   return (
     <View style={styles.container}>
