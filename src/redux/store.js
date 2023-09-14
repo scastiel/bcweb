@@ -4,9 +4,9 @@ import tokenReducer from "./tokenReducer";
 import apiReducer from "./apiReducer";
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {persistReducer} from "redux-persist";
-import storage from "redux-persist/lib/storage";
 
 const appReducers = combineReducers({
   tokenReducer,
@@ -18,7 +18,7 @@ const logger = createLogger();
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
   whitelist: ['tokenReducer']
 }
 
