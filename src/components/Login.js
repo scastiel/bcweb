@@ -39,9 +39,9 @@ const Login = () => {
         }
       );
       dispatch(addToken(response.data.access));
-      Alert.alert("new AccessToken : ", response.data.access);
+      //Alert.alert("new AccessToken : ", response.data.access);
     } catch (error) {
-      Alert.alert("Error", `There was an error while refreshing : ${error}`);
+      //Alert.alert("Error", `There was an error while refreshing : ${error}`);
     }
   };
 
@@ -75,12 +75,12 @@ const Login = () => {
      
       //console.log(store.getState());
 
-      Alert.alert("Success", "Login successfull");
+      //Alert.alert("Success", "Login successfull");
       //console.log (store.getState());
       renewToken(newRefreshToken);
 
     } catch (error) {
-      Alert.alert("Error", `There was an error while logging: ${error}`);
+      //Alert.alert("Error", `There was an error while logging: ${error}`);
     }
   };
 
