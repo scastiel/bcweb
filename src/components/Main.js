@@ -13,6 +13,7 @@ const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/"; *
 
 const Main = () => {
   const logged = useSelector((state) => state.tokenReducer.isLogged);
+  //const token = useSelector((state) => state.tokenReducer.token);
   //const dispatch = useDispatch();
   return (
     <View style={styles.container}>

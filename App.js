@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/"; */
 
 const App = () => {
-  const isLogged = false;
+  //const isLogged = false;
   return (
     <Provider store={store}>
       <Main/>

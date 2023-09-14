@@ -1,11 +1,11 @@
-import {View, Text, FlatList, ActivityIndicator, Alert} from 'react-native';
+import {View, Text, ActivityIndicator, Alert} from 'react-native';
 import apiCall from '../redux/apiCall';
 import * as React from "react";
 import { useSelector, useDispatch, useEffect } from "react-redux";  
 
 const BcList = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.apiReducer.data);
+  const data = JSON.stringify(useSelector((state) => state.apiReducer.data.results));
   const loading = useSelector((state) => state.apiReducer.loading);
   const token = useSelector((state) => state.tokenReducer.token);
   Alert.alert('that is the secret token : ', token);
@@ -35,11 +35,9 @@ const BcList = () => {
       {loading ? (
         <ActivityIndicator size="large" color="red" />
       ) : (
-        <FlatList
-          data={data.results}
-          renderItem={({item}) => <Text>{item.title}</Text>}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        <Text>
+          {data}
+        </Text>
       )}
     </View>
   );
