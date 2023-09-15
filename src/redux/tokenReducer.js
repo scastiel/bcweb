@@ -1,7 +1,7 @@
 import { ADD_TOKEN, ADD_REFRESH_TOKEN, TOGGLE_IS_LOGGED } from "./actions";
 
 const initialState = { 
-    token: "firstKey",
+    token: "",
     refreshToken: "",
     isLogged: false,
 };

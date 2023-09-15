@@ -5,8 +5,16 @@ import apiReducer from "./apiReducer";
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import {persistReducer} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import {
+  persistReducer,
+  persistStore,   
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,} from "redux-persist";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const appReducers = combineReducers({
   tokenReducer,
@@ -18,20 +26,21 @@ const logger = createLogger();
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whitelist: ['tokenReducer']
+  storage: AsyncStorage,
+  whitelist: ['tokenReducer'],
 }
 
-
-
-const rootReducer = (state, action) => appReducers(state, action);
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, appReducers)
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk, logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }).concat(thunk, logger),
 });
 
+const persistor = persistStore(store)
 
-export default store;
+export default { store, persistor }
