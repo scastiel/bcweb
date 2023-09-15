@@ -1,34 +1,39 @@
-import {View, Text, ActivityIndicator, Alert} from 'react-native';
+import {ScrollView, Text, ActivityIndicator, StyleSheet, Alert} from 'react-native';
 import apiCall from '../redux/apiCall';
 import * as React from "react";
 import { useSelector, useDispatch, useEffect } from "react-redux";  
+import Login from "./Login";
 
 const BcList = () => {
   const dispatch = useDispatch();
-  const data = JSON.stringify(useSelector((state) => state.apiReducer.data.results));
-  const loading = useSelector((state) => state.apiReducer.loading);
-  const token = useSelector((state) => state.tokenReducer.token);
-  //Alert.alert('that is the secret token : ', token);
+  
+  //Alert.alert('message is : ', message);
+
+  const isEmpty = (variable) => {return variable === null || variable === undefined || variable === ''};
 
   React.useEffect(() => {
     dispatch(apiCall('https://demo-btw.monkey-soft.fr/bcweb/bcx/', token));
   }, []);
 
+  const data = JSON.stringify(useSelector((state) => state.apiReducer.data.results));
+  const error = JSON.stringify(useSelector((state) => state.apiReducer.error));
+  const loading = useSelector((state) => state.apiReducer.loading);
+  const token = useSelector((state) => state.tokenReducer.token);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center'}}>
+    <ScrollView style={styles.container}>
       {loading ? (
         <ActivityIndicator size="large" color="red" />
-      ) : (
+      ) : isEmpty(data) ? <Login/> :(
         <Text>
           {data}
         </Text>
-      )}
-    </View>
+      ) }
+    </ScrollView>
   );
 }
 
-/* const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#fff",
@@ -63,6 +68,6 @@ const BcList = () => {
       borderRadius: 3,
       marginBottom: 30,
     },
-  }); */
+  });
 
 export default BcList;
