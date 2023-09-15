@@ -8,27 +8,12 @@ const BcList = () => {
   const data = JSON.stringify(useSelector((state) => state.apiReducer.data.results));
   const loading = useSelector((state) => state.apiReducer.loading);
   const token = useSelector((state) => state.tokenReducer.token);
-  Alert.alert('that is the secret token : ', token);
+  //Alert.alert('that is the secret token : ', token);
 
   React.useEffect(() => {
     dispatch(apiCall('https://demo-btw.monkey-soft.fr/bcweb/bcx/', token));
   }, []);
 
-/*   return (
-
-            <SafeAreaView style={styles.container}>
-                <Text style={styles.toolbar}>Choisir un bordereau</Text>
-                <ScrollView style={styles.content}>
-                <TextInput
-                    style={styles.preview}
-                    placeholder="bons de chargement"
-                    editable={false}
-                    multiline
-                />
-                </ScrollView>
-            </SafeAreaView>
-
-  ) */
 
   return (
     <View style={{flex: 1, backgroundColor: 'white', justifyContent: 'center'}}>

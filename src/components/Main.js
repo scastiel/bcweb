@@ -11,10 +11,20 @@ import { useSelector } from "react-redux";
 /* const endpointBc = "https://demo-btw.monkey-soft.fr/bcweb/bcx/";
 const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/"; */
 
+
+
 const Main = () => {
   const logged = useSelector((state) => state.tokenReducer.isLogged);
   //const token = useSelector((state) => state.tokenReducer.token);
   //const dispatch = useDispatch();
+  
+
+  /* let retrievedStoreStr = await AsyncStorage.getItem('persist:root'); // this is a string
+  console.log(retrievedStoreStr); */
+  //let retrievedStore = JSON.parse(retrievedStoreStr); // this will be a JSON object
+  //let reducer1 = retrievedStore.reducer1; // should now have your reducer
+  
+
   return (
     <View style={styles.container}>
       { logged ? <BcList/> : <Login/>}
