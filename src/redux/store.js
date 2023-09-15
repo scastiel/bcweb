@@ -4,6 +4,8 @@ import tokenReducer from "./tokenReducer";
 import apiReducer from "./apiReducer";
 import {createLogger} from 'redux-logger';
 import thunk from 'redux-thunk';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import {
   persistReducer,
