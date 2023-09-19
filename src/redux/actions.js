@@ -1,12 +1,13 @@
 /* import axios from "axios";
 const API_URL = "https://demo-btw.monkey-soft.fr/"; */
-
-
+import storeAndPersistor from './store';
+const { persistor } = storeAndPersistor;
 
 //action's type for login
 export const ADD_TOKEN = "ADD_TOKEN";
 export const ADD_REFRESH_TOKEN = "ADD_REFRESH_TOKEN";
 export const TOGGLE_IS_LOGGED = "TOGGLE_IS_LOGGED";
+export const SIGNOUT = "SIGNOUT";
 
 //action's type FOR api
 export const API_PENDING = "API_PENDING";
@@ -35,6 +36,13 @@ export const toggleIsLogged = (isLogged) => {
     payload: isLogged,
   };
 };
+
+export const signout = () => {
+  persistor.purge();
+  return {
+    type: SIGNOUT,
+  }
+}
 
 // action creators for API
 

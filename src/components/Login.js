@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToken, addRefreshToken, toggleIsLogged } from '../redux/actions';
 import * as React from "react";
 import axios from 'axios';
-//import store from '../redux/store';
 
 
 const Login = () => {
@@ -38,6 +37,7 @@ const Login = () => {
           },
         }
       );
+      //let tok = response.data.access + "€";
       dispatch(addToken(response.data.access));
       //Alert.alert("new AccessToken : ", response.data.access);
     } catch (error) {

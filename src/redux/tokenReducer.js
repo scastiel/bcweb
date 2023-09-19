@@ -1,4 +1,4 @@
-import { ADD_TOKEN, ADD_REFRESH_TOKEN, TOGGLE_IS_LOGGED } from "./actions";
+import { ADD_TOKEN, ADD_REFRESH_TOKEN, TOGGLE_IS_LOGGED, SIGNOUT } from "./actions";
 
 const initialState = { 
     token: "",
@@ -22,6 +22,11 @@ const tokenReducer = (state=initialState, action) => {
             return {
                 ...state,
                 isLogged: !action.payload
+            };
+        case SIGNOUT:
+            return {
+                ...state,
+                token: "", refreshToken:"", isLogged:false
             }
         default:
             return state;

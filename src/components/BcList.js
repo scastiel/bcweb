@@ -1,7 +1,7 @@
 import {ScrollView, Text, ActivityIndicator, StyleSheet, Alert} from 'react-native';
 import apiCall from '../redux/apiCall';
 import * as React from "react";
-import { useSelector, useDispatch, useEffect } from "react-redux";  
+import { useSelector, useDispatch } from "react-redux";  
 import Login from "./Login";
 
 const BcList = () => {
@@ -11,16 +11,18 @@ const BcList = () => {
 
   const isEmpty = (variable) => {return variable === null || variable === undefined || variable === ''};
 
+
+  // au chargement uniquement
   React.useEffect(() => {
     dispatch(apiCall('https://demo-btw.monkey-soft.fr/bcweb/bcx/', token));
   }, []);
 
   const data = JSON.stringify(useSelector((state) => state.apiReducer.data.results));
-  const error = JSON.stringify(useSelector((state) => state.apiReducer.error));
+  //const error = JSON.stringify(useSelector((state) => state.apiReducer.error));
   const loading = useSelector((state) => state.apiReducer.loading);
   const token = useSelector((state) => state.tokenReducer.token);
 
-  return (
+/*   return (
     <ScrollView style={styles.container}>
       {loading ? (
         <ActivityIndicator size="large" color="red" />
@@ -29,6 +31,17 @@ const BcList = () => {
           {data}
         </Text>
       ) }
+    </ScrollView>
+  ); */
+  return (
+    <ScrollView style={styles.container}>
+      {loading ? (
+        <ActivityIndicator size="large" color="red" />
+      ) : 
+        <Text>
+          {data}
+        </Text>
+      }
     </ScrollView>
   );
 }
