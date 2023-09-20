@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Login from "./Login";
 import BcList from "./BcList";
+import Message from "./Message";
 import { useSelector } from "react-redux";  
 
 
@@ -27,6 +28,7 @@ const Main = () => {
 
   return (
     <View style={styles.container}>
+      <Message/>
       { logged ? <BcList/> : <Login/>}
     </View>
   );

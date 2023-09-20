@@ -10,16 +10,22 @@ const apiCall = (url, token) => (dispatch) => {
     axios
       .get(url, config)
       .then((response) => {
-        if (![200].includes(response.status)) {
-          dispatch(signout());
-        } else {
-          //dispatch(signout());
-          dispatch(fetchSuccess(response.data));
+
+        switch (response.status) {
+          case 401:
+          case 403:
+            dispatch(signout());
+            break;
+          case 200:
+          case 201:
+          case 202:
+            dispatch(fetchSuccess(response.data));
+            break;
         }
       })
       .catch((error) => {
-        dispatch(fetchError(error));
-        console.log(error);
+        dispatch(fetchError(error.message));
+        //console.log("erreur : ", error);
       });
   });
 };

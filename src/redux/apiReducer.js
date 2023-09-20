@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     data: '',
     error: '',
+    message:'',
 };
 
 const apiReducer = (state=initialState, action) => {
@@ -23,7 +24,7 @@ const apiReducer = (state=initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
-                loading: false,
+                loading: false, message: "Le serveur rencontre un problème. Veuillez réessayer ultérieurement. ",
             }
         default:
             return state;
