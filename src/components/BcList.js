@@ -2,14 +2,15 @@ import {ScrollView, Text, ActivityIndicator, StyleSheet, Alert} from 'react-nati
 import apiCall from '../redux/apiCall';
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";  
-import Login from "./Login";
+import Message from "./Message";
+
 
 const BcList = () => {
   const dispatch = useDispatch();
   
   //Alert.alert('message is : ', message);
 
-  const isEmpty = (variable) => {return variable === null || variable === undefined || variable === ''};
+  //const isEmpty = (variable) => {return variable === null || variable === undefined || variable === ''};
 
 
   // au chargement uniquement
@@ -35,9 +36,11 @@ const BcList = () => {
   ); */
   return (
     <ScrollView style={styles.container}>
+      <Message/>
       {loading ? (
         <ActivityIndicator size="large" color="red" />
       ) : 
+        
         <Text>
           {data}
         </Text>
