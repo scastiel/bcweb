@@ -6,7 +6,6 @@ import {
 import LoginScreen from "./screens/LoginScreen";
 import BcListScreen from "./screens/BcListScreen";
 //import Message from "./Message";
-import { useSelector } from "react-redux";  
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
@@ -16,7 +15,6 @@ const endpointRefreshToken = "https://demo-btw.monkey-soft.fr/refresh-token/"; *
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
-  const logged = useSelector((state) => state.tokenReducer.isLogged);
   //const token = useSelector((state) => state.tokenReducer.token);
   //const dispatch = useDispatch();
   
@@ -39,9 +37,8 @@ const Main = () => {
   return (
 
       <Stack.Navigator>
-
-          { logged ? <Stack.Screen name="BcList" component={BcListScreen} options={{ title: 'Liste des Bons de chargement' }}/> : <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }}/>}
-
+        <Stack.Screen name="BcList" component={BcListScreen} options={{ title: 'Liste des Bons de chargement' }}/>
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'Login' }}/>
       </Stack.Navigator>
 
   );
